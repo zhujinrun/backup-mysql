@@ -1,0 +1,37 @@
+{
+    "name": "backup-mysql",
+    "version": "1.0.0",
+    "description": "mysql backup trigged by CloudWatch autoamtically",
+    "scripts": {
+        "clean": "rimraf dist",
+        "build": "nest build",
+        "build:prod": "run-s build copy:prod install:prod",
+        "copy:prod": "copyfiles -V -E -f \"serverless.yaml\" \"dist/\"  && copyfiles -V -E -f \"package.json\" \"dist/\"",
+        "install:prod": "cd ./dist && npm install --prod",
+        "deploy2aws": "cd ./dist && serverless deploy --region us-east-1",
+        "deploy2aws:cn": "cd ./dist && serverless deploy --region cn-northwest-1",
+        "deploy2cn": "run-s build:prod deploy2aws:cn",
+        "deploy": "run-s clean build:prod deploy2aws",
+        "test:local": "ts-node ./test/local.ts"
+    },
+    "dependencies": {
+        "mysql": "^2.18.1",
+        "mysqldump": "^3.2.0",
+        "source-map-support": "^0.5.10"
+    },
+    "devDependencies": {
+        "@types/aws-lambda": "^8.10.17",
+        "@types/mysql": "^2.15.17",
+        "@types/node": "^10.12.18",
+        "@types/serverless": "^1.72.5",
+        "aws-sdk": "^2.823.0",
+        "copyfiles": "^2.4.0",
+        "dotenv": "^8.2.0",
+        "npm-run-all": "^4.1.5",
+        "rimraf": "3.0.2",
+        "serverless": "^2.17.0",
+        "ts-loader": "^5.3.3",
+        "ts-node": "^8.10.2",
+        "typescript": "^3.9.7"
+    }
+}
