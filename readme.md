@@ -4,6 +4,8 @@ Backup AWS RDS mysql database peroidically with automatically.
 
 Deploy Lambda and WatchLog Schedule by Serverless framework.
 
+![backup-mysql-arch](./_images/backup-mysql-arch.png)
+
 ## prerequisite
 
 - for local testing
@@ -11,6 +13,7 @@ Deploy Lambda and WatchLog Schedule by Serverless framework.
 
 - for AWS
   open serverless.yaml, update the **environment** section with your real database information.
+  ![serverless-environments](_images/serverless-environments.png)
 
 ## local test
 
@@ -18,6 +21,8 @@ Deploy Lambda and WatchLog Schedule by Serverless framework.
 
 ```sh
 npm install
+
+# .env should configured with correct database connection information before executing local testing
 npm run test:local
 ```
 

@@ -12,3 +12,6 @@ backup
 dist
 
 .env
+*-cnblog.md
+/**/.DS_Store
+convert2cnblog.sh

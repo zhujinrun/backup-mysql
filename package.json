@@ -4,7 +4,7 @@
     "description": "mysql backup trigged by CloudWatch autoamtically",
     "scripts": {
         "clean": "rimraf dist",
-        "build": "nest build",
+        "build": "tsc",
         "build:prod": "run-s build copy:prod install:prod",
         "copy:prod": "copyfiles -V -E -f \"serverless.yaml\" \"dist/\"  && copyfiles -V -E -f \"package.json\" \"dist/\"",
         "install:prod": "cd ./dist && npm install --prod",
