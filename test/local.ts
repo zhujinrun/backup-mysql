@@ -1,11 +1,10 @@
 import * as dotenv from "dotenv"
 dotenv.config();
 
-import * as lambda from "../src/lambda"
-
+import * as lambda from "../src"
 
 async function main() {
-    await lambda.handler({}, {});
+  await lambda.handler({}, {});
 }
 
 main()

@@ -1,25 +1,26 @@
 import * as fs from 'fs';
-import * as AWS from "aws-sdk";
 
-const BUCKET_NAME = process.env["BUCKET_NAME"];
+import { Upload } from "@aws-sdk/lib-storage";
+import { S3 } from "@aws-sdk/client-s3";
 
-const ENV = process.env["ENV"];
-if (ENV && ENV === "local") {
-    console.log("local");
-    AWS.config.region = "cn-northwest-1"
-}
+const BUCKET_NAME = process.env.BUCKET_NAME;
 
 export async function upload(filename, path, date) {
-    const s3 = new AWS.S3();
+  const s3 = new S3({
+    region: "us-east-1"
+  });
+  try {
+    const result = await new Upload({
+      client: s3,
 
-    try {
-        const result = await s3.upload({
-            Bucket: BUCKET_NAME,
-            Key: filename,
-            Body: fs.createReadStream(path)
-        }).promise();
-        console.log(`saved to bucket: ${result.Bucket}/${result.Key}`);
-    } catch (error) {
-        console.error(error);
-    }
+      params: {
+        Bucket: BUCKET_NAME,
+        Key: filename,
+        Body: fs.createReadStream(path)
+      }
+    }).done();
+    console.log(`saved to bucket: ${result.Bucket}/${result.Key}`);
+  } catch (error) {
+    console.error(error);
+  }
 }

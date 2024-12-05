@@ -23,7 +23,7 @@ Deploy Lambda and WatchLog Schedule by Serverless framework.
 npm install
 
 # .env should configured with correct database connection information before executing local testing
-npm run test:local
+npm run test
 ```
 
 ## configure
@@ -34,12 +34,6 @@ npm run test:local
   in serverless.yaml, change the **schedule** under functions\main\events, such as rate(1 day) or rate (2 days)
 
 ## deployment
-
-- deploy to AWS China
-
-```sh
-npm run deploy2cn
-```
 
 - deploy to AWS Global
 

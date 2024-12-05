@@ -1,0 +1,19 @@
+service: eassist-mysql-backup
+
+package:
+  individually: true
+  exclude:
+    - test/**
+
+provider:
+  lambdaHashingVersion: 20201221
+  name: aws
+  runtime: nodejs18.x
+  stage: prod
+  region: us-east-1
+
+functions:
+  app: 
+    handler: src/index.handler
+    events:
+      - schedule: rate(1 day)
